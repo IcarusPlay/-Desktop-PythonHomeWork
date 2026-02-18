@@ -1,0 +1,57 @@
+
+[
+  {
+    "name": "Diana Williams",
+    "birth_date": "12.06.1983",
+    "enrollment_date": "29.04.2023",
+    "courses": ["Physics", "Chemistry"]
+  },
+  {
+    "name": "Tina Miller",
+    "birth_date": "06.07.2004",
+    "enrollment_date": "18.04.2020",
+    "courses": ["Biology", "Business"]
+  },
+  {
+    "name": "Kevin Miller",
+    "birth_date": "20.12.2004",
+    "enrollment_date": "16.12.2020",
+    "courses": ["Linguistics", "Math", "History"]
+  },
+  {
+    "name": "Fiona Brown",
+    "birth_date": "05.07.1999",
+    "enrollment_date": "02.09.2022",
+    "courses": ["Art", "Philosophy"]
+  },
+  {
+    "name": "Charlie Davis",
+    "birth_date": "17.07.1998",
+    "enrollment_date": "17.05.2023",
+    "courses": ["Chemistry", "Physics", "Business"]
+  },
+  {
+    "name": "Diana Jones",
+    "birth_date": "24.12.1980",
+    "enrollment_date": "26.11.2021",
+    "courses": ["Economics", "Linguistics"]
+  },
+  {
+    "name": "Alice Johnson",
+    "birth_date": "22.09.1981",
+    "enrollment_date": "23.12.2020",
+    "courses": ["Chemistry", "Economics", "Math"]
+  },
+  {
+    "name": "Ian Lopez",
+    "birth_date": "23.11.2001",
+    "enrollment_date": "07.05.2020",
+    "courses": ["Philosophy", "Art", "Physics"]
+  },
+  {
+    "name": "Kevin Davis",
+    "birth_date": "30.01.1997",
+    "enrollment_date": "20.03.2021",
+    "courses": ["Math", "Economics"]
+  }
+]

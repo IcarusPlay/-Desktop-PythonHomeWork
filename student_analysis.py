@@ -36,18 +36,18 @@ def save_report(report_data, filename):
 
 def main():
     students = load_students("student_courses.json")
-    print(f"Total students: {len(students)}")
+    print(f"с {len(students)}")
 
     avg_age = calculate_average_age(students)
-    print(f"Average age at enrollment: {avg_age:.1f} years")
+    print(f"Средний возраст при зачислении: {avg_age:.1f} год")
 
     courses_count = count_courses(students)
-    print(f"Students per course: {courses_count}")
+    print(f"Студентов на курс: {courses_count}")
 
     report = {
-        "total_students": len(students),
-        "average_enrollment_age": avg_age,
-        "students_per_course": courses_count
+        "Студентов на курс": len(students),
+        "Средний возраст при зачислении": avg_age,
+        "Студентов на курс": courses_count
     }
 
     save_report(report, "student_courses_report.json")
@@ -55,3 +55,5 @@ def main():
 
 
 print("Запуск программы."); main()
+
+

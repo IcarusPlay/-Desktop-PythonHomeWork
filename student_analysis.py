@@ -1,59 +1,57 @@
 import json
 from datetime import datetime
-from collections import Counter
-from pathlib import Path
 
 
-def load_students(file_path):
-    """Загрузка данных студентов из JSON-файла."""
-    path = Path(file_path)
-    if not path.exists():
-        raise FileNotFoundError(f"Файл {file_path} не найден")
-    return json.loads(path.read_text(encoding="utf-8"))
+def load_students(filename):
+    with open(filename, "r", encoding="utf-8") as file:
+        return json.load(file)
 
 
 def calculate_average_age(students):
-    """Средний возраст при поступлении."""
-    ages = []
-    for s in students:
-        birth = datetime.strptime(s["birth_date"], "%d.%m.%Y")
-        enrollment = datetime.strptime(s["enrollment_date"], "%d.%m.%Y")
-        age_years = (enrollment - birth).days / 365.25
-        ages.append(age_years)
-    return sum(ages) / len(ages) if ages else 0
+    total_age = 0
+
+    for student in students:
+        birth = datetime.strptime(student["birth_date"], "%d.%m.%Y")
+        enroll = datetime.strptime(student["enrollment_date"], "%d.%m.%Y")
+        age = (enroll - birth).days / 365.25
+        total_age += age
+
+    if len(students) == 0:
+        return 0
+
+    return total_age / len(students)
 
 
 def count_courses(students):
-    """Количество студентов на каждом курсе."""
-    courses_list = [course for s in students for course in s.get("courses", [])]
-    return dict(Counter(courses_list))
+    courses = {}
+
+    for student in students:
+        for course in student.get("courses", []):
+            if course in courses:
+                courses[course] += 1
+            else:
+                courses[course] = 1
+
+    return courses
 
 
-def save_report(report_data, filename):
-    """Сохранение отчета в JSON."""
-    Path(filename).write_text(json.dumps(report_data, indent=4, ensure_ascii=False), encoding="utf-8")
+students = load_students("student_courses.json")
 
+print("Всего студентов:", len(students))
 
-def main():
-    students = load_students("student_courses.json")
-    print(f"с {len(students)}")
+avg_age = calculate_average_age(students)
+print("Средний возраст при зачислении:", round(avg_age, 1))
 
-    avg_age = calculate_average_age(students)
-    print(f"Средний возраст при зачислении: {avg_age:.1f} год")
+courses_count = count_courses(students)
+print("Количество студентов по курсам:", courses_count)
 
-    courses_count = count_courses(students)
-    print(f"Студентов на курс: {courses_count}")
+report = {
+    "Общее количество студентов": len(students),
+    "Средний возраст при зачислении": round(avg_age, 1),
+    "Количество студентов по курсам": courses_count
+}
 
-    report = {
-        "Студентов на курс": len(students),
-        "Средний возраст при зачислении": avg_age,
-        "Студентов на курс": courses_count
-    }
+with open("student_courses_report.json", "w", encoding="utf-8") as file:
+    json.dump(report, file, indent=4, ensure_ascii=False)
 
-    save_report(report, "student_courses_report.json")
-    print("Report saved to 'student_courses_report.json'")
-
-
-print("Запуск программы."); main()
-
-
+print("Отчет сохранен")
